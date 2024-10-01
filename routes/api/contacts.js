@@ -1,25 +1,24 @@
-const express = require('express')
+const express = require('express');
+const router = express.Router();
+const {
+  listContacts,
+  getContactById,
+  addContact,
+  removeContact,
+  updateContact,
+  updateStatusContact,
+} = require('../../models/controllers/contacts');
+const validateContact = require('../../middlewares/validation');
 
-const router = express.Router()
+// Существующие маршруты
+router.get('/', listContacts);
+router.get('/:contactId', getContactById);
+router.post('/', validateContact, addContact);
+router.delete('/:contactId', removeContact);
+router.put('/:contactId', validateContact, updateContact);
 
-router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+// Новый маршрут для обновления статуса favorite
+router.patch('/:contactId/favorite', updateStatusContact);
 
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+module.exports = router;
 
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-module.exports = router
