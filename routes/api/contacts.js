@@ -1,6 +1,8 @@
-const express = require('express')
+const express = require('express');
+const router = express.Router();
+const auth = require('../../middleware/auth');
 
-const router = express.Router()
+router.use(auth);
 
 router.get('/', async (req, res, next) => {
   res.json({ message: 'template message' })
@@ -21,5 +23,8 @@ router.delete('/:contactId', async (req, res, next) => {
 router.put('/:contactId', async (req, res, next) => {
   res.json({ message: 'template message' })
 })
+
+
+
 
 module.exports = router
